@@ -1,9 +1,9 @@
 from flask import Flask, render_template, request
 from werkzeug.utils import secure_filename
 import sys
-from datetime import datetime
 
-def GetTimePeriod(st,et):
+
+def get_time_period(st,et):
     st_list = st.split(":")
     et_list = et.split(":")
     
@@ -29,12 +29,7 @@ def GetTimePeriod(st,et):
     if hours<0:
         hours = hours +24
     time_duration = (hours*60)+minutes
-    #print(time_duration)
-    
-    #if flag == 'False':
-    #    return time_duration1,flag
-    #else:
-    #    return time_duration,flag         
+             
 
     return time_duration
  
@@ -49,7 +44,7 @@ def upload_file():
  
     
 @app.route('/display', methods = ['GET', 'POST'])
-def parse():  
+def get_time_value():  
     if request.method == 'POST':       
         
         f = request.files['file']        
@@ -82,11 +77,7 @@ def parse():
 
 
                 try:
-                    #print("st=",st,"et=",et,"totaltime=",totaltime)
-                    #st = datetime.strptime(st,fomt)                
-                    #et = datetime.strptime(et,fomt)               
-
-                    #totaltime = totaltime+(et-st).seconds/60
+                    
 
 
                     st_list = st.split(":")
@@ -96,7 +87,7 @@ def parse():
                     if int(st_list[0]) >12 or int(et_list[0])> 12:
                         Error = "error at=",str(count)+"line"
                     else:                               
-                        period = GetTimePeriod(et,st)
+                        period = get_time_period(et,st)
                         Error = "No Errors"
 
                     totaltime = totaltime + period
