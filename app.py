@@ -74,10 +74,8 @@ def get_time_value():
                 et = mat[index+1:et+1];
                 st = st[:len(st)-2] + ":" + st[len(st)-2:]
                 et = et[:len(et)-2] + ":" + et[len(et)-2:]
-
-
-                try:
-                    
+                
+                try:                
 
 
                     st_list = st.split(":")
@@ -88,7 +86,7 @@ def get_time_value():
                         Error = "error at=",str(count)+"line"
                     else:                               
                         period = get_time_period(et,st)
-                        Error = "No Errors"
+                        #Error = "No Errors"
 
                     totaltime = totaltime + period
 
@@ -97,9 +95,15 @@ def get_time_value():
                     continue;
                 index = mat.find('-')
                 count = count+1
-        output = "Total time spent by the author is "+str(int((totaltime)/60))+" hours "+str(int((totaltime)%60))+" mins"
         
-        return render_template('index.html',prediction_text=output,Error1 = Error)
+        if Error:
+            output = Error
+        else:
+            output = "Total time spent by the author is "+str(int((totaltime)/60))+" hours "+str(int((totaltime)%60))+" mins"
+        
+            
+        
+        return render_template('index.html',prediction_text=output)
         
     return render_template('index.html')
                     
