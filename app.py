@@ -86,7 +86,7 @@ def get_time_value():
                         Error = "error at=",str(count)+"line"
                     else:                               
                         period = get_time_period(et,st)
-                        #Error = "No Errors"
+                        Error = False
 
                     totaltime = totaltime + period
 
